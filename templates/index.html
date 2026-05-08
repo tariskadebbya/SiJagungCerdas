@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SiJagungCerdas - Deteksi Penyakit Jagung</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="{{ url_for('static', filename='assets/logo-corn.png') }}" alt="Logo Jagung">
+      <h1>SiJagungCerdas</h1>
+    </div>
+
+    <div class="menu-toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+
+    <nav class="nav-menu">
+      <a href="{{ url_for('index') }}">Beranda</a>
+      <a href="{{ url_for('deteksi') }}">Deteksi</a>
+      <a href="{{ url_for('edukasi') }}">Edukasi</a>
+      <a href="{{ url_for('tentang') }}">Tentang</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Deteksi Penyakit Tanaman Jagung Secara Cepat dan Akurat</h2>
+      <p>Gunakan kecerdasan buatan untuk mengenali penyakit daun jagung hanya dengan satu foto.</p>
+      <a href="{{ url_for('deteksi') }}" class="btn">Mulai Deteksi</a>
+    </div>
+  </section>
+
+  <section class="features">
+    <h3>Fitur Utama</h3>
+    <div class="feature-grid">
+      <div class="feature">
+        <img src="static/assets/icon-detect.png" alt="Deteksi Cepat">
+        <h4>Deteksi Cepat</h4>
+        <p>Unggah gambar daun jagung dan dapatkan hasil analisis dalam hitungan detik.</p>
+      </div>
+      <div class="feature">
+        <img src="static/assets/icon-edu.png" alt="Edukasi Penyakit">
+        <h4>Edukasi Penyakit</h4>
+        <p>Pelajari gejala, penyebab, dan cara pencegahan penyakit jagung.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="about-content">
+      <h3>Tentang SiJagungCerdas</h3>
+      <p>Platform berbasis AI yang membantu petani mengenali penyakit tanaman jagung lebih dini, 
+      meningkatkan hasil panen, dan mendukung pertanian cerdas di Indonesia.</p>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h3>Lindungi Jagungmu Sekarang!</h3>
+    <a href="{{ url_for('deteksi') }}" class="btn">Mulai Deteksi Sekarang</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 SiJagungCerdas.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
