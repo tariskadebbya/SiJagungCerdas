@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!file) return;
 
-    // Validasi gambar
     if (!file.type.startsWith("image/")) {
       alert("File harus berupa gambar!");
       input.value = "";
@@ -55,13 +54,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     selectedFile = file;
 
-    // Preview gambar
     if (previewImage) {
       previewImage.src = URL.createObjectURL(file);
       previewImage.style.display = "block";
     }
 
-    // Reset hasil lama
     if (resultBox) {
       resultBox.style.display = "none";
     }
@@ -99,7 +96,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const formData = new FormData();
     formData.append("image", selectedFile);
 
-    // Tampilkan loading
     if (resultBox) {
       resultBox.style.display = "block";
     }
@@ -121,9 +117,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const data = await response.json();
 
-      console.log(data);
+      console.log("Hasil Prediksi:", data);
 
-      // Error backend
+      /**
+       * ==========================================
+       * ERROR BACKEND
+       * ==========================================
+       */
       if (!response.ok) {
 
         if (diseaseName) {
@@ -140,49 +140,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
       /**
        * ==========================================
-       * HASIL NON JAGUNG
+       * HASIL PREDIKSI
        * ==========================================
        */
-      if (data.status === "non_jagung") {
+      let kelas = data.kelas;
 
-        if (diseaseName) {
-          diseaseName.textContent =
-            "❌ Gambar bukan daun jagung";
-        }
-
-        if (confidenceText) {
-          confidenceText.textContent =
-            `Tingkat Kepercayaan: ${data.confidence}%`;
-        }
-
-        return;
-      }
-
-      /**
-       * ==========================================
-       * HASIL JAGUNG
-       * ==========================================
-       */
-      if (diseaseName) {
-
-        let penyakit = data.penyakit;
-
-        // Format nama penyakit
-        if (penyakit === "hawar_daun") {
-          penyakit = "Hawar Daun";
-        }
-        else if (penyakit === "karat_daun") {
-          penyakit = "Karat Daun";
-        }
-        else if (penyakit === "sehat") {
-          penyakit = "Daun Sehat";
-        }
+      if (kelas === "Bukan Jagung") {
 
         diseaseName.textContent =
-          `🌽 Penyakit: ${penyakit}`;
+          "❌ Gambar Bukan Daun Jagung";
+
+      } else if (kelas === "Hawar") {
+
+        diseaseName.textContent =
+          "🌽 Penyakit: Hawar Daun";
+
+      } else if (kelas === "Karat") {
+
+        diseaseName.textContent =
+          "🌽 Penyakit: Karat Daun";
+
+      } else if (kelas === "Sehat") {
+
+        diseaseName.textContent =
+          "🌿 Daun Jagung Sehat";
+
+      } else {
+
+        diseaseName.textContent =
+          `🌽 Hasil Deteksi: ${kelas}`;
       }
 
       if (confidenceText) {
+
         confidenceText.textContent =
           `Tingkat Kepercayaan: ${data.confidence}%`;
       }

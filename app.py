@@ -119,10 +119,10 @@ def predict():
     except Exception as e:
 
         print("\n❌ ERROR:")
-        print(e)
+        print(str(e))
 
         return jsonify({
-            "error": "Gagal melakukan prediksi"
+            "error": str(e)
         }), 500
 
     finally:
